@@ -1,2 +1,2 @@
 # tbl_postgres
-Repositorio para lbas y configuraciones sobre PostgreSQL
+Repositorio para labs y configuraciones sobre PostgreSQL
