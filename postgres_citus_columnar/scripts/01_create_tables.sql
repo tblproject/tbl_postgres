@@ -19,4 +19,4 @@ CREATE TABLE personas_columnar (
     cp VARCHAR(10),
     longitud DOUBLE PRECISION,
     latitud DOUBLE PRECISION
-) using columnar;
+) USING columnar;
