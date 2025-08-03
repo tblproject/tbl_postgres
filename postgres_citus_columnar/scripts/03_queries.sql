@@ -16,9 +16,16 @@ SELECT nombre FROM personas;
 EXPLAIN analyze
 SELECT nombre FROM personas_columnar;
 
--- Comparativa consulta por campos
+-- Comparativa consultando 3  campos
 EXPLAIN analyze
 SELECT nombre, edad, calle FROM personas;
 
 EXPLAIN analyze
 SELECT nombre, edad, calle FROM personas_columnar;
+
+-- Comparativa consultando 5 campos
+EXPLAIN analyze
+SELECT nombre, edad, calle, ciudad, provincia FROM personas;
+
+EXPLAIN analyze
+SELECT nombre, edad, calle, ciudad, provincia FROM personas_columnar;
