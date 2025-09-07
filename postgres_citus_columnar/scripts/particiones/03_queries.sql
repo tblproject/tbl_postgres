@@ -22,10 +22,10 @@ WHERE id = 280;
 
 select * from ventas where id = 280;
 
-
+-- Cambiar partición a heap
 SELECT alter_table_set_access_method('ventas_2020', 'heap');
 
-
+-- Probar a actualizar de nuveo
 UPDATE ventas_2020
 SET cliente = 'Manuel de la Rosa'
 WHERE id = 147;
