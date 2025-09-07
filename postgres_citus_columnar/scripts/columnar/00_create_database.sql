@@ -1,3 +1,4 @@
+-- Pasos para crear la base de datos Personas
 CREATE DATABASE personas;
 
 -- Se debe cambiar a la nueva base de datos creada, 
