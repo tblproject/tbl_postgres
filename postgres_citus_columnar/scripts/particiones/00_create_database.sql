@@ -1,4 +1,4 @@
--- Pasos para crear la base de datos Personas
+-- Pasos para crear la base de datos Ventas
 CREATE DATABASE ventas;
 
 -- Se debe cambiar a la nueva base de datos creada, 
