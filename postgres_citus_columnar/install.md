@@ -1,4 +1,4 @@
-# Configuración de pg_duckdb
+# Configuración de citus_columnar
 En este tutorial se explican los pasos dados para montar **PostgreSQL 17** sobre **Ubuntu Server 24.04 LTS**, e instalar la extensión **pg_duckdb** para poder trabajar con Postgres como un motor columnar.
 
 Todos los comandos que se muestran en este tutorial se han lanzado con usuario **root** para el caso de los comandos a nivel de sistema operativo, y con el usuario **postgres** para los comandos lanzados contra Postgres, salvo que se diga lo contrario.

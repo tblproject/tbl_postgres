@@ -2,7 +2,7 @@
 CREATE DATABASE ventas;
 
 -- Se debe cambiar a la nueva base de datos creada, 
--- para instalar la estensión en la base de datos
+-- para instalar la extensión en la base de datos
 CREATE EXTENSION citus;
 CREATE EXTENSION citus_columnar;
 

@@ -6,6 +6,7 @@ select count(id) from ventas_2021 v2
 
 -- Convertir en columnar la partición de ventas_2020
 SELECT alter_table_set_access_method('ventas_2020', 'columnar');
+VACUUM (FREEZE, ANALYZE) ventas_2020;
 
 -- Intentar actualizar una entrada en la partición columnar
 UPDATE ventas_2020
