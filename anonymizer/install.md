@@ -35,76 +35,10 @@ postgres=# SELECT * FROM pg_available_extensions;
 (48 filas)
 ```
 
-### Pasos para el uso de la extensión
-#### Crear una base de datos y aplicar la extensión
-
-```sql
--- Como postgres
-CREATE DATABASE rrhh;
-\c rrhh
-
--- Crear extensión en la base de datos rrhh
-CREATE EXTENSION anon CASCADE;
--- inicio de la extensión, esto creará el esquema anon en la base de datos rrhh
-SELECT anon.init();
-
--- Modificaciones para cargar las librerías de anonymizer al inicio de las sesiones en PostgreSQL y modificar la base de datos para habilitar dynamic data masking
-ALTER DATABASE rrhh SET anon.transparent_dynamic_masking = 'on';
-ALTER DATABASE rrhh SET session_preload_libraries = 'anon';
-
-\c rrhh  -- RECONECTAR para que se apliquen los cambios en la sesión del usuario postgres para seguir con la configuración
-
--- Se crea la tabla empleados
-CREATE TABLE empleados (
-    id SERIAL PRIMARY KEY,
-    nombre VARCHAR(100),
-    apellidos VARCHAR(150),
-    dni VARCHAR(15),
-    email VARCHAR(150),
-    telefono VARCHAR(20),
-    direccion VARCHAR(200),
-    provincia VARCHAR(100),
-    salario NUMERIC(10,2)
-);
-
--- Se carga set de datos en la tabla empleados
-COPY empleados(id,nombre,apellidos,dni,email,telefono,direccion,provincia,salario)
-FROM '/DATASETS/empleados.csv' DELIMITER ',' CSV HEADER;
-
--- Se crea un usuario con permisos para ver todo, y otro que verá datos enmascarados
-CREATE ROLE rrhh_admin LOGIN PASSWORD 'AdminPass123';
-CREATE ROLE rrhh_consulta LOGIN PASSWORD 'UserPass123';
-
--- Se les concede permisos de acceso a la tabla empleados
-GRANT CONNECT ON DATABASE rrhh TO rrhh_consulta, rrhh_admin;
-GRANT USAGE ON SCHEMA public TO rrhh_consulta, rrhh_admin;
-GRANT SELECT ON empleados TO rrhh_consulta, rrhh_admin;
-
--- Se crean reglas de enmascarado
-SECURITY LABEL FOR anon ON COLUMN empleados.dni
-IS 'MASKED WITH FUNCTION anon.partial(dni, 2, ''******'', 0)';
-
-SECURITY LABEL FOR anon ON COLUMN empleados.email
-IS 'MASKED WITH FUNCTION anon.fake_email()';
-
-SECURITY LABEL FOR anon ON COLUMN empleados.salario
-IS 'MASKED WITH VALUE 0';
-
-SECURITY LABEL FOR anon ON COLUMN empleados.telefono
-IS 'MASKED WITH FUNCTION anon.partial(telefono, 2, ''*******'', 2)';
-
--- Se modifica el usuario rrhh_consulta para que se le apliquen las reglas de enmascarado
-SECURITY LABEL FOR anon ON ROLE rrhh_consulta IS 'MASKED';
-ALTER ROLE rrhh_admin SET anon.masking = off;
-ALTER ROLE rrhh_consulta SET anon.masking = on;
-
--- Se arranca el servicio de anonimización
-SELECT anon.start_dynamic_masking();
-
-```
-
 
 https://postgresql-anonymizer.readthedocs.io/en/latest/dynamic_masking/
+https://access.crunchydata.com/documentation/postgresql-anonymizer/latest/declare_masking_rules/
+
 
 
 
