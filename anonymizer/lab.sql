@@ -85,7 +85,7 @@ ALTER FUNCTION anon.partial(text, integer, text, integer) SECURITY DEFINER SET s
 
 SELECT * FROM pg_seclabel WHERE provider = 'rrhh';
 SELECT * FROM pg_seclabel WHERE provider = 'financiero';
-SELECT * FROM anon.pg_masking_rules;
+
 
 
 
