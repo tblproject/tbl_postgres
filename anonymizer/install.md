@@ -36,9 +36,6 @@ postgres=# SELECT * FROM pg_available_extensions;
 ```
 
 
-https://postgresql-anonymizer.readthedocs.io/en/latest/dynamic_masking/
-https://access.crunchydata.com/documentation/postgresql-anonymizer/latest/declare_masking_rules/
-
 
 
 
